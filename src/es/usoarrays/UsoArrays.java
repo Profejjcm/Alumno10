@@ -4,9 +4,9 @@ public class UsoArrays {
 //Para generar los métodos utilizamos la refactorización. Seleccionamos el código que queremos refactorizar, click derecho, "Refactor">"Introduce">"Method". Le asignamos el nombre y aceptamos. Si hay duplicados, nos avisa para sustituirlos también por el método.
     public static void main(String[] args) {
 
-        int[] control = new int[40];
-        int[] practicas = new int[40];
-        float[] calificaciones = new float[40];
+        int[] control = new int[NUM_ALUMNOS];
+        int[] practicas = new int[NUM_ALUMNOS];
+        float[] calificaciones = new float[NUM_ALUMNOS]; //Seleccionamos el número "Refactor">Introduce>Variable. Le asignamos el nombre y seleccionamos que sustituya el resto de ocurrencias iguales (5).
         int maxNota = 0;
         int minNota = 0;
         int countAprobados = 0;
@@ -28,7 +28,7 @@ public class UsoArrays {
         generarEstadisticas(control, calificaciones, estadistica);
 
         //Método generarAprobadosSuspensos
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < NUM_ALUMNOS; i++) {
             if (calificaciones[i] < 5) {
                 countAprobados += 1;
             } else {
@@ -38,6 +38,7 @@ public class UsoArrays {
         //Método generarAprobadosSuspensos
         mostrarResultados(minNota, maxNota, control, practicas, calificaciones, countAprobados, countSuspensos);
     }
+    public static final int NUM_ALUMNOS = 40;
 
     private static void mostrarResultados(int minNota, int maxNota, int[] control, int[] practicas, float[] calificaciones, int countAprobados, int countSuspensos) {
         //Método mostrarResultados
@@ -65,7 +66,7 @@ public class UsoArrays {
                 }
             }
             if (count != 0) {
-                estadistica[i] = ((float) count / 40);
+                estadistica[i] = ((float) count / NUM_ALUMNOS);
             } else {
                 estadistica[i] = 0;
             }
