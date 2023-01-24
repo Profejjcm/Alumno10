@@ -1,7 +1,7 @@
 package es.usoarrays;
 
 public class UsoArrays {
-// Para la refactorización seleccionamos todo el código, hacemos click derecho "Refactor">"Introduce">"Metod". Nos pide darle un nombre, se lo asignamos empezando en minusculas. Si hay más iguales nos pregunta si queremos sustituirlos también, le decimos que sí y listo.
+
     public static void main(String[] args) {
 
         int[] control = new int[40];
@@ -13,42 +13,49 @@ public class UsoArrays {
         int countSuspensos = 0;
         float[] estadistica = new float[10];
 
-        generarNotas(control);
+        //Método generarNotas
+        //Genera notas random entre 1 y 10
+        for (int i = 0; i < control.length; i++) {
+            control[i] = (int) (Math.random() * 11);
+        }
+        //Método generarNotas
 
-        minNota = buscarMenor(control, minNota);
-
-        maxNota = buscarMayor(control, maxNota);
-        
-        //Método buscarMayor
-        //creamos el array de notas "practicas"
-        generarNotas(practicas);
-
-        generarCalificaciones(control, calificaciones, practicas);
-
-        generarEstadisticas(control, calificaciones, estadistica);
-
-        //Método generarAprobadosSuspensos
-        for (int i = 0; i < 40; i++) {
-            if (calificaciones[i] < 5) {
-                countAprobados += 1;
-            } else {
-                countSuspensos += 1;
+        //Método buscarMenor        
+        int postEval = 11;
+        for (int i = 0; i < control.length; i++) {
+            int preEval = control[i];
+            if (preEval < postEval) {
+                minNota = preEval;
+                postEval = control[i];
             }
         }
-        //Método generarAprobadosSuspensos
+        //Método buscarMenor
 
-        //Método mostrarResultados 
-        System.out.println("La nota mínima es  : " + minNota);
-        System.out.println("La nota máxima es  : " + maxNota);
-         System.out.println("Array de Notas     :" + Arrays.toString(control));
-        System.out.println("Prácticas          :" + Arrays.toString(practicas));
-        System.out.println("Calificaciones     :" + Arrays.toString(calificaciones));
-        System.out.println("Número de aprobados: " + countAprobados);
-        System.out.println("Número de suspensos: " + countSuspensos);
-        //Método mostrarResultados         
-    }
+        //Método buscarMayor        
+        int postEva2 = 0;
+        for (int i = 0; i < control.length; i++) {
+            int preEval = control[i];
+            if (preEval > postEva2) {
+                maxNota = preEval;
+                postEva2 = control[i];
+            }
+        }
+        //Método buscarMayor
 
-    public static void generarEstadisticas(int[] control, float[] calificaciones, float[] estadistica) {
+        //creamos el array de notas "practicas"
+        for (int i = 0; i < practicas.length; i++) {
+            practicas[i] = (int) (Math.random() * 11);
+        }
+
+        //Método generarCalificaciones
+        for (int i = 0; i < control.length; i++) {
+            calificaciones[i]
+                    = (((float) control[i]
+                    + (float) practicas[i])
+                    / 2);
+        }
+        //Método generarCalificaciones       
+
         //Método generarEstadisticas
         //Sacamos la estadística de calificaciones
         //hacemos un array de 10 para la estadística.      
@@ -72,52 +79,25 @@ public class UsoArrays {
                     + sol + "%");
         }
         //Método generarEstadisticas   
-    }
 
-    public static void generarCalificaciones(int[] control, float[] calificaciones, int[] practicas) {
-        //Método generarCalificaciones
-        for (int i = 0; i < control.length; i++) {
-            calificaciones[i]
-                    = (((float) control[i]
-                    + (float) practicas[i])
-                    / 2);
-        }
-        //Método generarCalificaciones       
-    }
-
-    public static int buscarMayor(int[] control, int maxNota) {
-        //Método buscarMayor
-        int postEva2 = 0;
-        for (int i = 0; i < control.length; i++) {
-            int preEval = control[i];
-            if (preEval > postEva2) {
-                maxNota = preEval;
-                postEva2 = control[i];
+        //Método generarAprobadosSuspensos
+        for (int i = 0; i < 40; i++) {
+            if (calificaciones[i] < 5) {
+                countAprobados += 1;
+            } else {
+                countSuspensos += 1;
             }
         }
-        return maxNota;
-    }
+        //Método generarAprobadosSuspensos
 
-    public static int buscarMenor(int[] control, int minNota) {
-        //Método buscarMenor
-        int postEval = 11;
-        for (int i = 0; i < control.length; i++) {
-            int preEval = control[i];
-            if (preEval < postEval) {
-                minNota = preEval;
-                postEval = control[i];
-            }
-        }
-        //Método buscarMenor
-        return minNota;
-    }
-
-    public static void generarNotas(int[] control) {
-        //Método generarNotas
-        //Genera notas random entre 1 y 10
-        for (int i = 0; i < control.length; i++) {
-            control[i] = (int) (Math.random() * 11);
-        }
-        //Método generarNotas
+        //Método mostrarResultados 
+        System.out.println("La nota mínima es  : " + minNota);
+        System.out.println("La nota máxima es  : " + maxNota);
+        System.out.println("Array de Notas     :" + Arrays.toString(control));
+        System.out.println("Prácticas          :" + Arrays.toString(practicas));
+        System.out.println("Calificaciones     :" + Arrays.toString(calificaciones));
+        System.out.println("Número de aprobados: " + countAprobados);
+        System.out.println("Número de suspensos: " + countSuspensos);
+        //Método mostrarResultados         
     }
 }
