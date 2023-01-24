@@ -1,4 +1,7 @@
 package es.usoarrays;
+
+import java.util.Arrays;
+
 /**
  *
  * @author Aitor Trabanco LLano
@@ -29,7 +32,7 @@ public class UsoArrays extends OperacionesArrays {
         generarCalificaciones(control, calificaciones, practicas);
 
         generarEstadisticas(control, calificaciones, estadistica);
-
+//Click derecho, "BreakPoint">"Toggle Line Brak Point"
         //Método generarAprobadosSuspensos
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             if (calificaciones[i] < 5) {
